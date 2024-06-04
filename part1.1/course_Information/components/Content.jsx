@@ -1,14 +1,11 @@
-import Part from './Part';
-
-const Content = ({part1, exercise1,part2,exercise2, part3,exercise3}) =>{
-    return(
+import Part from "./Part";
+const Content = ({ parts }) => {
+  return (
     <div>
-            <Part name={part1} exercise={exercise1} />
-            <Part name={part2} exercise={exercise2} />
-            <Part name= {part3} exercise={exercise3} />
-
-       
+      {parts.map((part) => (
+        <Part key={part.name} name={part.name} exercises={part.exercises} />
+      ))}
     </div>
-    )
-}
-export default Content
+  );
+};
+export default Content;
