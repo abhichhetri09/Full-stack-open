@@ -1,3 +1,8 @@
+import Course from "../components/Course";
+import Header from "../components/Header";
+import Content from "../components/Content";
+import Part from "../components/Part";
+
 const App = () => {
   const course = {
     id: 1,
@@ -21,7 +26,11 @@ const App = () => {
     ],
   };
 
-  return <Course course={course} />;
+  return (
+    <>
+      <Course course={course} />
+    </>
+  );
 };
 
 export default App;
