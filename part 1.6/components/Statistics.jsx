@@ -14,7 +14,7 @@ const Statistics = ({ good, bad, neutral }) => {
       <StatisticsLine text="neutral" value={neutral} />
       <StatisticsLine text="bad" value={bad} />
       <StatisticsLine text="all" value={all} />
-      <StatisticsLine text="average" value={avearge} />
+      <StatisticsLine text="average" value={avearge.toFixed(1)} />
       <StatisticsLine text="positive" value={positivePercentage} />
     </div>
   );
