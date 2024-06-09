@@ -1,4 +1,5 @@
-const Perosns = ({ persons }) => {
+const Perosns = ({ persons, handleDelete }) => {
+  const handleOnClick = () => {};
   return (
     <div>
       <div>
@@ -6,6 +7,9 @@ const Perosns = ({ persons }) => {
           <div key={index}>
             {" "}
             {person.name} {person.number}
+            <button type="button" onClick={() => handleDelete(person.id)}>
+              delete
+            </button>
           </div>
         ))}
       </div>

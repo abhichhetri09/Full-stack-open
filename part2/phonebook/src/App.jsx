@@ -6,6 +6,9 @@ import axios from "axios";
 import personService from "./services/persons";
 const App = () => {
   const [persons, setPersons] = useState([]);
+  const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     personService.getAll().then((initialData) => {
@@ -13,10 +16,6 @@ const App = () => {
       setPersons(initialData);
     });
   }, []);
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
-  const [filter, setFilter] = useState("");
-
   const handleNameChange = (event) => {
     setNewName(event.target.value);
   };
@@ -39,6 +38,14 @@ const App = () => {
       });
     }
   };
+  const handleDelete = (id) => {
+    const person = persons.find((p) => p.id === id);
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personService.remove(id).then(() => {
+        setPersons(persons.filter((p) => p.id != id));
+      });
+    }
+  };
   const personsToShow = persons.filter((person) =>
     person.name?.toLowerCase().includes(filter?.toLowerCase() || "")
   );
@@ -56,7 +63,7 @@ const App = () => {
         addPerson={addPerson}
       />
       <h3>Numbers</h3>
-      <Persons persons={personsToShow} />
+      <Persons persons={personsToShow} handleDelete={handleDelete} />
       <div>debug: {newName}</div>
     </div>
   );
