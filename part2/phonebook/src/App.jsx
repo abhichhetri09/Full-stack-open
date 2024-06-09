@@ -45,6 +45,7 @@ const App = () => {
             );
             setNewName("");
             setNewNumber("");
+            alert("Updated!" + updatedPerson.name);
           });
       }
     } else {
@@ -61,6 +62,7 @@ const App = () => {
     if (window.confirm(`Delete ${person.name}?`)) {
       personService.remove(id).then(() => {
         setPersons(persons.filter((p) => p.id != id));
+        alert("Deleted " + person.name);
       });
     }
   };
