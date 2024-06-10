@@ -4,12 +4,13 @@ import PersonForm from "../components/PersonForm";
 import Persons from "../components/Persons";
 import axios from "axios";
 import personService from "./services/persons";
+import Notification from "../components/Notification";
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
-
+  const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
     personService.getAll().then((initialData) => {
       console.log("success!");
@@ -46,6 +47,10 @@ const App = () => {
             setNewName("");
             setNewNumber("");
             alert("Updated!" + updatedPerson.name);
+            setSuccessMessage(`Updated ${updatedPerson.name}`);
+            setTimeout(() => {
+              setSuccessMessage(null);
+            }, 5000);
           });
       }
     } else {
@@ -54,6 +59,10 @@ const App = () => {
         setPersons(persons.concat(personData));
         setNewName("");
         setNewNumber("");
+        setSuccessMessage(`Added ${newPerson.name}`);
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 5000);
       });
     }
   };
@@ -72,6 +81,7 @@ const App = () => {
 
   return (
     <div>
+      <Notification message={successMessage} />
       <h2>Phonebook</h2>
       <Filter handleFilterChange={handleFilterChange} />
       <h3>Add a new</h3>
