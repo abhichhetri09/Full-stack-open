@@ -54,14 +54,14 @@ function App() {
           <p>area {countries[0].area}</p>
           <h2>languages</h2>
           <ul>
-            {countries[0].languages &&
-            Object.values(countries[0].languages).length > 0 ? (
-              Object.values(countries[0].languages).map((language, index) => (
-                <li key={index}>{language}</li>
-              ))
-            ) : (
-              <li>Languages information not available</li>
-            )}
+            {Object.values(countries[0].languages).map((language, index) => (
+              <li key={index}>{language}</li>
+            ))}
+            <img
+              src={countries[0].flags.png}
+              alt={`Flag of ${countries[0].name.common}`}
+              width="100"
+            />
           </ul>
         </div>
       )}
