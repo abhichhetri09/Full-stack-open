@@ -1,10 +1,11 @@
 import { useState } from "react";
-import "./App.css";
+
 import Search from "../components/Search";
 import axios from "axios";
 function App() {
   const [countries, setCountries] = useState([]);
   const [message, setMessage] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const handleSearch = (query) => {
     if (query) {
       axios
@@ -35,7 +36,9 @@ function App() {
       setMessage("");
     }
   };
-
+  const handleOnClick = (country) => {
+    setSelectedCountry(country);
+  };
   return (
     <div>
       <Search onSearch={handleSearch} />
@@ -43,7 +46,10 @@ function App() {
       {countries.length >= 2 && countries.length <= 10 && (
         <ul>
           {countries.map((country) => (
-            <li key={country.cca3}>{country.name.common}</li>
+            <li key={country.cca3}>
+              {country.name.common}{" "}
+              <button onClick={() => handleOnClick(country)}>show</button>
+            </li>
           ))}
         </ul>
       )}
@@ -60,6 +66,24 @@ function App() {
             <img
               src={countries[0].flags.png}
               alt={`Flag of ${countries[0].name.common}`}
+              width="100"
+            />
+          </ul>
+        </div>
+      )}
+      {selectedCountry && (
+        <div>
+          <h1>{selectedCountry.name.common}</h1>
+          <p>capital {selectedCountry.capital}</p>
+          <p>area {selectedCountry.area}</p>
+          <h2>languages</h2>
+          <ul>
+            {Object.values(selectedCountry.languages).map((language, index) => (
+              <li key={index}>{language}</li>
+            ))}
+            <img
+              src={selectedCountry.flags.png}
+              alt={`Flag of ${selectedCountry.name.common}`}
               width="100"
             />
           </ul>
