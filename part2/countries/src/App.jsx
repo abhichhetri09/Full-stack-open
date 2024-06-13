@@ -46,8 +46,7 @@ function App() {
   };
   const fetchWeather = (latlng) => {
     const [lat, lon] = latlng;
-    const apiKey = "42e5863da95d9f343ef5aaf73dc338c8";
-
+    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
     console.log(latlng);
     axios
       .get(
