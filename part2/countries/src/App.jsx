@@ -7,7 +7,7 @@ function App() {
   const [message, setMessage] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [weather, setWeather] = useState(null);
-
+  const APIKEY = import.meta.env.VITE_API_KEY;
   const handleSearch = (query) => {
     setSelectedCountry(null);
     setWeather(null);
@@ -46,11 +46,11 @@ function App() {
   };
   const fetchWeather = (latlng) => {
     const [lat, lon] = latlng;
-    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
     console.log(latlng);
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric`
       )
       .then((response) => {
         setWeather(response.data);
@@ -91,7 +91,6 @@ function App() {
             alt={`Flag of ${countries[0].name.common}`}
             width="100"
           />
-
           {weather && (
             <div>
               <h2>Weather in {countries[0].capital}</h2>
