@@ -44,7 +44,7 @@ app.get(`/api/persons/:id`, (request, response) => {
   }
 });
 app.delete("/api/persons/:id", (request, response) => {
-  const id = (request.params.id, 0);
+  const id = request.params.id;
   phoneBook = phoneBook.filter((person) => person.id !== id);
 
   response.status(204).end();
