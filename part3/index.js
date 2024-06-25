@@ -1,6 +1,16 @@
 const express = require("express");
 const app = express();
-app.use(express.json());
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+morgan.token("body", (req) => JSON.stringify(req.body));
+
+const format =
+  ":method :url :status :res[content-length] - :response-time ms :body";
+app.use(morgan(format));
 let phoneBook = [
   {
     id: "1",
@@ -50,7 +60,7 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
-app.post("/api/persons", (request, require) => {
+app.post("/api/persons", (request, response) => {
   const body = request.body;
   if (!body.name || !body.number) {
     return response.status(400).json({
@@ -70,6 +80,7 @@ app.post("/api/persons", (request, require) => {
   phoneBook.push(newPerson);
   response.json(newPerson);
 });
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
