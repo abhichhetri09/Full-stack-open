@@ -4,9 +4,9 @@
   "description": "part3 exercise",
   "main": "index.js",
   "scripts": {
-    "postinstall": "echo 'No chmod on Windows'",
+    "postinstall": "node -e \"require('fs').chmodSync('./node_modules/.bin/nodemon', '755')\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx nodemon index.js"
+    "dev": "./node_modules/.bin/nodemon index.js"
   },
   "author": "Abhishek chhetri",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.4"
   }
 }
