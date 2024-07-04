@@ -4,6 +4,7 @@
   "description": "part3 exercise",
   "main": "index.js",
   "scripts": {
+    "postinstall": "echo 'No chmod on Windows'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon index.js"
   },
